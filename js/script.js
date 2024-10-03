@@ -132,7 +132,9 @@ function applyUpdates() {
     updateAddressDetails();
 	updateAboutSection();
 	updateCarouselSlides();
-	fetchAndDisplayGalleryProducts();
+	updateAboutUsBanner();
+	updateContactsBanner();
+	updateTypographyBAnner();
    
 }
 
@@ -335,6 +337,142 @@ function fetchAndDisplayGalleryProducts() {
             console.error('Error fetching data:', error);
         });
 }
+
+function updateAboutUsBanner() {
+	const apiUrl = `http://localhost:3001/properties/${PROJECTID}/banner`;
+
+	// Fetch banner data from the API using Fetch
+	fetch(apiUrl)
+	  .then(response => {
+		// Check if the response is ok (status in the range 200-299)
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		return response.json(); // Parse the JSON from the response
+	  })
+	  .then(data => {
+		// Log the response data
+		console.log('API Response:', data);
+
+		// Find the banner with heading "Aboutus"
+		const aboutUsBanner = data.categoryBanners.find(banner => 
+		  banner.heading.toLowerCase() === "aboutus"
+		);
+
+		// Check if the banner exists and has a valid image URL
+		if (aboutUsBanner && aboutUsBanner.image) {
+		  // Log the image URL
+		  console.log('About Us Banner Image URL:', aboutUsBanner.image);
+
+		  // Select the section where the background image needs to be applied
+		  const aboutUsSection = document.querySelector('.breadcrumbs-01');
+
+		  // Log the aboutUsSection to confirm it's selected correctly
+		  console.log('About Us Section:', aboutUsSection);
+
+		  // Apply the background image using inline CSS
+		  aboutUsSection.style.backgroundImage = `url('${aboutUsBanner.image}')`;
+		  aboutUsSection.style.backgroundSize = 'cover'; // Ensures the image covers the section
+		  aboutUsSection.style.backgroundPosition = 'center'; // Centers the image
+		  aboutUsSection.style.backgroundRepeat = 'no-repeat'; // Avoid repeating the image
+		} else {
+		  console.error('No valid banner found with the heading "Aboutus".');
+		}
+	  })
+	  .catch(error => {
+		console.error("Error fetching banner data:", error);
+	  });
+}
+
+function updateContactsBanner(){
+	const apiUrl = `http://localhost:3001/properties/${PROJECTID}/banner`;
+	// Fetch banner data from the API using Fetch
+	fetch(apiUrl)
+	  .then(response => {
+		// Check if the response is ok (status in the range 200-299)
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		return response.json(); // Parse the JSON from the response
+	  })
+	  .then(data => {
+		// Log the response data
+		console.log('API Response:', data);
+  
+		// Find the banner with heading "Aboutus"
+		const aboutUsBanner = data.categoryBanners.find(banner => 
+		  banner.heading.toLowerCase() === "contacts"
+		);
+  
+		// Check if the banner exists and has a valid image URL
+		if (aboutUsBanner && aboutUsBanner.image) {
+		  // Log the image URL
+		  console.log('About Us Banner Image URL:', aboutUsBanner.image);
+  
+		  // Select the section where the background image needs to be applied
+		  const aboutUsSection = document.querySelector('.breadcrumbs-02');
+  
+		  // Log the aboutUsSection to confirm it's selected correctly
+		  console.log('About Us Section:', aboutUsSection);
+  
+		  // Apply the background image using inline CSS
+		  aboutUsSection.style.backgroundImage = `url('${aboutUsBanner.image}')`;
+		  aboutUsSection.style.backgroundSize = 'cover'; // Ensures the image covers the section
+		  aboutUsSection.style.backgroundPosition = 'center'; // Centers the image
+		  aboutUsSection.style.backgroundRepeat = 'no-repeat'; // Avoid repeating the image
+		} else {
+		  console.error('No valid banner found with the heading "Aboutus".');
+		}
+	  })
+	  .catch(error => {
+		console.error("Error fetching banner data:", error);
+	  });
+  }
+
+  function updateTypographyBAnner(){
+	const apiUrl = `http://localhost:3001/properties/${PROJECTID}/banner`;
+	// Fetch banner data from the API using Fetch
+	fetch(apiUrl)
+	  .then(response => {
+		// Check if the response is ok (status in the range 200-299)
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		return response.json(); // Parse the JSON from the response
+	  })
+	  .then(data => {
+		// Log the response data
+		console.log('API Response:', data);
+  
+		// Find the banner with heading "Aboutus"
+		const aboutUsBanner = data.categoryBanners.find(banner => 
+		  banner.heading.toLowerCase() === "typography"
+		);
+  
+		// Check if the banner exists and has a valid image URL
+		if (aboutUsBanner && aboutUsBanner.image) {
+		  // Log the image URL
+		  console.log('About Us Banner Image URL:', aboutUsBanner.image);
+  
+		  // Select the section where the background image needs to be applied
+		  const aboutUsSection = document.querySelector('.breadcrumbs-03');
+  
+		  // Log the aboutUsSection to confirm it's selected correctly
+		  console.log('About Us Section:', aboutUsSection);
+  
+		  // Apply the background image using inline CSS
+		  aboutUsSection.style.backgroundImage = `url('${aboutUsBanner.image}')`;
+		  aboutUsSection.style.backgroundSize = 'cover'; // Ensures the image covers the section
+		  aboutUsSection.style.backgroundPosition = 'center'; // Centers the image
+		  aboutUsSection.style.backgroundRepeat = 'no-repeat'; // Avoid repeating the image
+		} else {
+		  console.error('No valid banner found with the heading "Aboutus".');
+		}
+	  })
+	  .catch(error => {
+		console.error("Error fetching banner data:", error);
+	  });
+  }
 
 	// Initialize scripts that require a finished document
 	$(function () {
