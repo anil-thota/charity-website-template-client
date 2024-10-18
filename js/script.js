@@ -247,18 +247,25 @@ function updateCarouselSlides() {
 	  .then(response => response.json())
 	  .then(data => {
 		if (data.banners && data.banners.length > 0) {
-		  const banner = data.banners[0]; // Assuming you want to use the first banner
+		  const banner = data.banners[0]; // Use the first banner
   
+		  // Update the background image
 		  const mainBannerImg = document.querySelector('.main-bunner-img');
 		  mainBannerImg.style.backgroundImage = `url(${banner.image})`;
 		  mainBannerImg.style.backgroundSize = 'cover';
   
-		  // Optionally, update text or add additional banner information
-		  const bannerHeading = document.createElement('h1');
-		  bannerHeading.innerText = banner.heading;
-		  mainBannerImg.appendChild(bannerHeading);
+		  // Update the heading
+		  const bannerHeading = document.querySelector('.main-bunner-title');
+		  if (bannerHeading) {
+			bannerHeading.innerText = banner.heading;
+		  }
   
-		  // You can add more elements or adjust as per banner data
+		  // Update the description (subHeading)
+		  const bannerDescription = document.querySelector('.bunner-content-modern p');
+		  if (bannerDescription) {
+			bannerDescription.innerText = banner.subHeading;
+		  }
+  
 		} else {
 		  console.error('No banners found in the response');
 		}
@@ -267,6 +274,7 @@ function updateCarouselSlides() {
 		console.error('Error fetching the banner:', error);
 	  });
   }
+  
   
 
 function fetchAndDisplayGalleryProducts() {
